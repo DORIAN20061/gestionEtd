@@ -110,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'Email' => $_POST['Email'],
         'nomPrt' => $_POST['nomPrt'],
         'emailPrt' => $_POST['emailPrt'],
+        'image'  => $_FILES['image'],
        
     ];
     $database = new Database();
