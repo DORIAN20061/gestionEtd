@@ -122,7 +122,7 @@ if ($conn) {
               <table class="table datatable">
                 <thead>
                   <tr>
-                    
+                    <th>Photo</th>
                     <th>Matricule</th>
                     <th>Nom</th>
                     <th>Prenom</th>
@@ -133,14 +133,19 @@ if ($conn) {
                     <th>DateIns</th>
                     <th>NomPrt</th>
                     <th>EmailPrt</th>
-                    
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php foreach ($result as $etudiants): ?>
                     <tr>
-                      
+                      <td>
+                        <?php if (!empty($etudiants['imagePath'])): ?>
+                          <img src="uploads/<?= htmlspecialchars($etudiants['imagePath']) ?>" alt="Photo de l'étudiant" class="rounded-circle">
+                        <?php else: ?>
+                          <img src="assets/img/default.png" alt="Photo de l'étudiant" class="rounded-circle">
+                        <?php endif; ?>
+                      </td>
                       <td><?= htmlspecialchars($etudiants['matricule'] ?? '') ?></td>
                       <td><?= htmlspecialchars($etudiants['nom'] ?? 'Inconnu') ?></td>
                       <td><?= htmlspecialchars($etudiants['prenom'] ?? 'Inconnu') ?></td>
@@ -151,10 +156,10 @@ if ($conn) {
                       <td><?= htmlspecialchars($etudiants['dateIns'] ?? '') ?></td>
                       <td><?= htmlspecialchars($etudiants['nomPrt'] ?? '') ?></td>
                       <td><?= htmlspecialchars($etudiants['emailPrt'] ?? '') ?></td>
-                     
+                      
                       <td>
                           <a href="modif.php?id=<?= urlencode($etudiants['id']) ?>" class="btn btn-warning"><i class="bi bi-feather"></i></a>
-                          <a href="bulletion.php?id=<?= urlencode($etudiants['id']) ?>" class="btn btn-success" onclick="return confirm('Êtes-vous sûr de vouloir générer son bulletin ?')"><i class="bi bi-file-earmark-post"></i></a>
+                          <a href="bulletion.php?id=<?= urlencode($etudiants['id']) ?>" class="btn btn-success" onclick="return confirm('Êtes-vous sûr de vouloir générer son bulletin ?')"><i class="bi bi-file-earmark-text"></i></a>
                           <a href="supprimer.php?id=<?= urlencode($etudiants['id']) ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')"><i class="bi bi-trash"></i></a>
                       </td>
                     </tr>

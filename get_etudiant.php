@@ -3,9 +3,6 @@ require_once "connexion.php";
 
 // Connexion à la base de données
 
-
-
-
 class Student {
     private $db;
 
@@ -34,4 +31,3 @@ class Student {
         }
     }
 }
-

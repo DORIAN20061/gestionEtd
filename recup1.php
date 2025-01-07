@@ -1,11 +1,8 @@
 <?php
 include "connexion.php";
 
-// Exemple d'utilisation
-
 class Etudiant {
     private $conn;
-    
 
     public function __construct($db) {
         $this->conn = $db;
@@ -31,12 +28,12 @@ class Etudiant {
         $stmt->bindParam(':Niveau', $data['Niveau']);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if (!$result) {
             echo "Classe introuvable.";
             return false;
         }
-    
+
         $data['total'] = $result['pension'];
         $data['solde'] = $data['total'];
         $data['matricule'] = $this->genererMatricule($data['Niveau']);
@@ -46,7 +43,7 @@ class Etudiant {
         // Gestion de l'image
         if (!empty($data['image']['tmp_name'])) {
             $targetDir = "uploads/";
-            $imageName = uniqid() . "_" . basename($data['image']['tmp_name']);
+            $imageName = uniqid() . "_" . basename($data['image']['name']);
             $targetFilePath = $targetDir . $imageName;
 
             $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
@@ -68,9 +65,9 @@ class Etudiant {
 
         // Requête SQL pour insérer les données, y compris le nom de l'image
         $sql = "INSERT INTO etudiants (
-            matricule, nom, prenom, dateNaiss, Niveau, Email, Statut, dateIns, nomPrt, emailPrt, pass, solde, total
+            matricule, nom, prenom, dateNaiss, Niveau, Email, Statut, dateIns, nomPrt, emailPrt, pass, solde, total, imagePath
         ) VALUES (
-            :matricule, :nom, :prenom, :dateNaiss, :Niveau, :Email, :Statut, :dateIns, :nomPrt, :emailPrt, :pass, :solde, :total
+            :matricule, :nom, :prenom, :dateNaiss, :Niveau, :Email, :Statut, :dateIns, :nomPrt, :emailPrt, :pass, :solde, :total, :imagePath
         )";
 
         $stmt = $this->conn->prepare($sql);
@@ -88,7 +85,7 @@ class Etudiant {
         $stmt->bindParam(':pass', $data['matricule']);
         $stmt->bindParam(':solde', $data['solde']);
         $stmt->bindParam(':total', $data['total']);
-       // $stmt->bindParam(':image', $data['imagePath']); // Bind du nom de l'image
+        $stmt->bindParam(':imagePath', $data['imagePath']); // Bind du nom de l'image
 
         try {
             $stmt->execute();
@@ -110,11 +107,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'Email' => $_POST['Email'],
         'nomPrt' => $_POST['nomPrt'],
         'emailPrt' => $_POST['emailPrt'],
-       
+        'image' => $_FILES['image']
     ];
     $database = new Database();
     $db = $database->getConnection();
-    
+
     $etudiant = new Etudiant($db);
     if ($etudiant->enregistrer($data)) {
         header("Location: etd.php");

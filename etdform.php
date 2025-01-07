@@ -79,7 +79,7 @@ try {
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
            
-            <span class="d-none d-md-block dropdown-toggle ps-2">Groupe 7</span>
+            <!-- <span class="d-none d-md-block dropdown-toggle ps-2">Groupe 7</span> -->
           </a><!-- End Profile Iamge Icon -->
 
           
@@ -112,9 +112,16 @@ try {
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Enregistrer un etudiant</h5>
-              <form action="recup1.php" method="post" >
-             
-                <div class="row mb-3">
+                  <form action="recup1.php" method="post" enctype="multipart/form-data">
+
+
+                  <div class="row mb-3">
+                    <label for="image" class="col-sm-2 col-form-label">Image:</label>
+                    <div class="col-sm-10">
+                      <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                    </div>
+                  </div>
+                                <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nom:</label>
                   <div class="col-sm-10">
                     <input name="nom" type="text" class="form-control" required>
