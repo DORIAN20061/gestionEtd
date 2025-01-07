@@ -112,16 +112,9 @@ try {
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Enregistrer un etudiant</h5>
-                  <form action="recup1.php" method="post" enctype="multipart/form-data">
-
-
-                  <div class="row mb-3">
-                    <label for="image" class="col-sm-2 col-form-label">Image:</label>
-                    <div class="col-sm-10">
-                      <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
-                    </div>
-                  </div>
-                                <div class="row mb-3">
+              <form action="recup1.php" method="post" >
+             
+                <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nom:</label>
                   <div class="col-sm-10">
                     <input name="nom" type="text" class="form-control" required>
@@ -140,7 +133,13 @@ try {
                   </div>
                 </div>
                
-                
+              <div class="row mb-3">
+                <label for="image" class="col-sm-2 col-form-label">Image:</label>
+                <div class="col-sm-10">
+                  <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                </div>
+              </div>
+                            
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Email:</label>
                   <div class="col-sm-10">
